@@ -43,8 +43,8 @@ class RequestBuilder:
 
     def create_request(self, request_data: dict) -> dict:
         query_string = urlencode(request_data)
-        encoded_bytes = base64.b64encode(query_string.encode())
-        string = encoded_bytes.decode().replace('+', '-').replace('/', '_')
+        from .util import encode_safe_url_base64
+        string = encode_safe_url_base64(query_string)
         return {
             'data': string,
             'sign': md5((string + request_data['sign_password']).encode()).hexdigest()
