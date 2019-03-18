@@ -1,6 +1,5 @@
 from hashlib import md5
 from urllib.parse import urlencode
-import base64
 
 
 class RequestBuilder:
