@@ -11,7 +11,8 @@ class WebToPay:
         data['environment'] = data['environment'] if 'environment' in data.keys() else 'production'
         return RequestBuilder().build_request(data)
 
-    def get_payment_method_list(self, project_id: int, amount_in_cents: int, currency: str = 'EUR',
+    @staticmethod
+    def get_payment_method_list(project_id: int, amount_in_cents: int, currency: str = 'EUR',
                                 desired_language: str = 'en', environment: str = 'production') -> object:
         from .payment_method_list_provider import PaymentMethodListProvider
         return PaymentMethodListProvider().get_payment_method_list(project_id, currency, amount_in_cents,
