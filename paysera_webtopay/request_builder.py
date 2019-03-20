@@ -46,5 +46,5 @@ class RequestBuilder:
         string = encode_safe_url_base64(query_string)
         return {
             'data': string,
-            'sign': md5((string + request_data['sign_password']).encode()).hexdigest()
+            'sign': md5(string.encode() + request_data['sign_password'].encode()).hexdigest()
         }
