@@ -1,27 +1,19 @@
-import unittest
-import base64
 import OpenSSL
-from paysera_webtopay.ss2_sign_checker import Ss2SignChecker
+from paysera_webtopay.util import decode_safe_url_base64
 
 
-class Ss2SignCheckerTest(unittest.TestCase):
-    def test_check_sign_ss2(self):
-        with open('private.key', 'r') as cert_priv:
-            cert_text_priv = cert_priv.read()
-        cert_priv.close()
+class Ss2SignChecker:
+    def __init__(self, public_key: str):
+        self._public_key = public_key
 
-        private_key = OpenSSL.crypto.load_privatekey(OpenSSL.crypto.FILETYPE_PEM, cert_text_priv.encode())
-        sign = OpenSSL.crypto.sign(private_key, 'encodedData', "sha1")
-        data = {
-            'data': 'encodedData',
-            'ss1': 'bad-ss1',
-            'ss2': base64.b64encode(sign),
-        }
-        with open('public.key', 'r') as cert_pub:
-            cert_text_pub = cert_pub.read()
-        cert_pub.close()
-        self.assertTrue(Ss2SignChecker(cert_text_pub).check_sign(data))
+    def check_sign(self, data_dict: dict):
+        if not all(key in data_dict for key in
+                   ('data', 'ss2')):
+            raise ValueError('Not enough parameters in callback. Possible version mismatch.')
+        pub_key_object = OpenSSL.crypto.load_publickey(OpenSSL.crypto.FILETYPE_PEM, self._public_key)
+        x509 = OpenSSL.crypto.X509()
+        x509.set_pubkey(pub_key_object)
 
-
-if __name__ == "main":
-    unittest.main()
+        check = OpenSSL.crypto.verify(x509,
+                                      decode_safe_url_base64(data_dict['ss2']), data_dict['data'], "sha1")
+        return check is None

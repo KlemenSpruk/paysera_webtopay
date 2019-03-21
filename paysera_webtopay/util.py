@@ -1,6 +1,6 @@
 def decode_safe_url_base64(encoded_text: str) -> str:
     import base64
-    return base64.urlsafe_b64decode(encoded_text.encode()).decode()
+    return base64.urlsafe_b64decode(encoded_text.encode())
 
 
 def encode_safe_url_base64(text: str) -> str:
@@ -16,6 +16,5 @@ def get_configuration(environment: str) -> dict:
 
 
 def parse_http_query(query: str):
-    print(query)
     from urllib.parse import parse_qs
     return parse_qs(query)

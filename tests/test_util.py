@@ -13,8 +13,9 @@ class UtilTest(unittest.TestCase):
         #     "\x33\0\1\2\3\4\5\x92\xFF\xAA\0\1\2\3\4\5\x92\xFE\xAA\xEE"))
 
     def test_decode(self):
-        self.assertEqual(paysera_webtopay.util.decode_safe_url_base64('amRmb2dqdWRoZ29kamdvaWRmamd1aGZkZ18va2RnZg=='),
-                         "jdfogjudhgodjgoidfjguhfdg_/kdgf")
+        self.assertEqual(
+            paysera_webtopay.util.decode_safe_url_base64('amRmb2dqdWRoZ29kamdvaWRmamd1aGZkZ18va2RnZg==').decode(),
+            "jdfogjudhgodjgoidfjguhfdg_/kdgf")
         # self.assertEqual("\x33\0\1\2\3\4\5\x92\xFF\xAA\0\1\2\3\4\5\x92\xFE\xAA\xEE",
         #                  paysera_webtopay.util.decode_safe_url_base64('MwABAgMEBZL_qgABAgMEBZL-qu4='))
         # self.assertEqual("\x33\0\1\2\3\4\5\x92\xFF\xAA\0\1\2\3\4\5\x92\xFE\xAA\xEE",
@@ -28,7 +29,7 @@ class UtilTest(unittest.TestCase):
         for s in strings:
             self.assertEqual(s,
                              paysera_webtopay.util.decode_safe_url_base64(
-                                 paysera_webtopay.util.encode_safe_url_base64(s))
+                                 paysera_webtopay.util.encode_safe_url_base64(s)).decode()
                              )
 
     def test_parse_http_query(self):
@@ -36,7 +37,8 @@ class UtilTest(unittest.TestCase):
             'param1': ['some string'],
             'param2': ['special symbols !!%(@_-+/='],
             'param3': ['slashes \\\'"'],
-        }, paysera_webtopay.util.parse_http_query('param1=some+string&param2=special+symbols+%21%21%25%28%40_-%2B%2F%3D&param3=slashes+%5C%27%22'))
+        }, paysera_webtopay.util.parse_http_query(
+            'param1=some+string&param2=special+symbols+%21%21%25%28%40_-%2B%2F%3D&param3=slashes+%5C%27%22'))
 
 
 if __name__ == "main":

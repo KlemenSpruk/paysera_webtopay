@@ -1,9 +1,9 @@
 import OpenSSL
-import base64
+from .util import decode_safe_url_base64
 
 
 class Ss2SignChecker:
-    def __init__(self, public_key: str):
+    def __init__(self, public_key: bytes):
         self._public_key = public_key
 
     def check_sign(self, data_dict: dict):
@@ -13,6 +13,7 @@ class Ss2SignChecker:
         pub_key_object = OpenSSL.crypto.load_publickey(OpenSSL.crypto.FILETYPE_PEM, self._public_key)
         x509 = OpenSSL.crypto.X509()
         x509.set_pubkey(pub_key_object)
+
         check = OpenSSL.crypto.verify(x509,
-                                      base64.b64decode(data_dict['ss2']), data_dict['data'], "sha1")
+                                      decode_safe_url_base64(data_dict['ss2']), data_dict['data'], "sha1")
         return check is None

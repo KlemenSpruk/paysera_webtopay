@@ -4,8 +4,10 @@ from paysera_webtopay.ss1_sign_checker import Ss1SignChecker
 from paysera_webtopay.ss2_sign_checker import Ss2SignChecker
 from paysera_webtopay.callback_validator import CallbackValidator
 
+projectid = 123
+
 parsed = {
-    'projectid': 123,
+    'projectid': projectid,
     'someparam': 'qwerty123',
     'type': 'micro'
 }
@@ -22,7 +24,7 @@ class CallBackValidatorTest(unittest.TestCase):
             'sign': 'qwerty'
         }
 
-        self.assertEqual(parsed, CallbackValidator().validate_and_parse_data({**request, **parsed}))
+        self.assertEqual(parsed, CallbackValidator(password='qwerty').validate_and_parse_data({**request, **parsed}, projectid))
 
 
 if __name__ == "main":
