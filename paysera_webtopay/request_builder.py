@@ -30,7 +30,7 @@ class RequestBuilder:
             'projectid'
         )
 
-    def build_request(self, data: dict):
+    def build_request(self, data: dict) -> dict:
         self.validate_request(data)
         return self.create_request(data)
 

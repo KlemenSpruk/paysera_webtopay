@@ -1,7 +1,7 @@
 class WebToPay:
 
     @staticmethod
-    def build_request(data: dict) -> object:
+    def build_request(data: dict) -> dict:
         from .request_builder import RequestBuilder
         if not all(key in data for key in
                    ('sign_password', 'projectid')):
@@ -27,8 +27,13 @@ class WebToPay:
         return response
 
     @staticmethod
-    def sms_answer(data: dict):
+    def sms_answer(data: dict) -> None:
         if not all(key in data for key in ('id', 'msg', 'sign_password')):
             raise KeyError('id, msg and sign_password are required')
         from .sms_answer_sender import SmsAnswerSender
         SmsAnswerSender(str(data.get('sign_password'))).send_answer(int(data.get('id')), str(data.get('msg')))
+
+    @staticmethod
+    def get_public_pay_url(environment: str = 'production') -> str:
+        from .configuration import configuration
+        return configuration['routes'][environment]['payment']
