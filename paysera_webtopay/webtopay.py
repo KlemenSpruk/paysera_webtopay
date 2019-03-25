@@ -5,7 +5,7 @@ class WebToPay:
         from .request_builder import RequestBuilder
         if not all(key in data for key in
                    ('sign_password', 'projectid')):
-            raise ValueError('Data sign_password or projectid missing.')
+            raise KeyError('Data sign_password or projectid missing.')
         data['environment'] = data['environment'] if 'environment' in data.keys() else 'production'
         return RequestBuilder().build_request(data)
 
@@ -25,3 +25,10 @@ class WebToPay:
         # if str(response['type'][0]) != 'macro':
         #     raise Exception('Only macro payment callbacks are accepted')
         return response
+
+    @staticmethod
+    def sms_answer(data: dict):
+        if not all(key in data for key in ('id', 'msg', 'sign_password')):
+            raise KeyError('id, msg and sign_password are required')
+        from .sms_answer_sender import SmsAnswerSender
+        SmsAnswerSender(str(data.get('sign_password'))).send_answer(int(data.get('id')), str(data.get('msg')))
