@@ -11,7 +11,7 @@ class WebToPay:
 
     @staticmethod
     def get_payment_method_list(project_id: int, amount_in_cents: int, currency: str = 'EUR',
-                                desired_language: str = 'en', environment: str = 'production') -> object:
+                                desired_language: str = 'en', environment: str = 'production') -> dict:
         from .payment_method_list_provider import PaymentMethodListProvider
         return PaymentMethodListProvider().get_payment_method_list(project_id, currency, amount_in_cents,
                                                                    desired_language, environment)
