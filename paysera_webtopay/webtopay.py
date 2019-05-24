@@ -20,10 +20,6 @@ class WebToPay:
     def check_response(get_request_data: dict, projectid: int, sign_password: str) -> dict:
         from .check_response import CheckResponse
         response = CheckResponse().check_response(get_request_data, projectid, sign_password)
-        # if int(response['test'][0]) != 0:
-        #     raise Exception('Testing, real payment was not made')
-        # if str(response['type'][0]) != 'macro':
-        #     raise Exception('Only macro payment callbacks are accepted')
         return response
 
     @staticmethod

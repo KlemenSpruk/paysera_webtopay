@@ -9,17 +9,11 @@ class UtilTest(unittest.TestCase):
                          paysera_webtopay.util.encode_safe_url_base64(
                              "jdfogjudhgodjgoidfjguhfdg_/kdgf"))
 
-        # self.assertEqual("MwABAgMEBZL_qgABAgMEBZL-qu4=", paysera_webtopay.util.encode_safe_url_base64(
-        #     "\x33\0\1\2\3\4\5\x92\xFF\xAA\0\1\2\3\4\5\x92\xFE\xAA\xEE"))
-
     def test_decode(self):
         self.assertEqual(
-            paysera_webtopay.util.decode_safe_url_base64('amRmb2dqdWRoZ29kamdvaWRmamd1aGZkZ18va2RnZg==').decode(),
+            paysera_webtopay.util.decode_safe_url_base64(
+                'amRmb2dqdWRoZ29kamdvaWRmamd1aGZkZ18va2RnZg==').decode(),
             "jdfogjudhgodjgoidfjguhfdg_/kdgf")
-        # self.assertEqual("\x33\0\1\2\3\4\5\x92\xFF\xAA\0\1\2\3\4\5\x92\xFE\xAA\xEE",
-        #                  paysera_webtopay.util.decode_safe_url_base64('MwABAgMEBZL_qgABAgMEBZL-qu4='))
-        # self.assertEqual("\x33\0\1\2\3\4\5\x92\xFF\xAA\0\1\2\3\4\5\x92\xFE\xAA\xEE",
-        #                  paysera_webtopay.util.decode_safe_url_base64('MwABAgMEBZL/qgABAgMEBZL+qu4='))
 
     def test_encode_decode(self):
         strings = (

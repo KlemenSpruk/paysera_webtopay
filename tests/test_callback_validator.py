@@ -24,7 +24,11 @@ class CallBackValidatorTest(unittest.TestCase):
             'sign': 'qwerty'
         }
 
-        self.assertEqual(parsed, CallbackValidator(password='qwerty').validate_and_parse_data({**request, **parsed}, projectid))
+        self.assertEqual(
+            parsed,
+            CallbackValidator(password='qwerty').validate_and_parse_data({**request, **parsed},
+                                                                         projectid)
+        )
 
 
 if __name__ == "main":
