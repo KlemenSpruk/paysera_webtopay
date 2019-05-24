@@ -1,4 +1,5 @@
 # paysera_webtopay
+Python integration library for Paysera checkout API: https://developers.paysera.com/en/payments/current
 
 ## Requirements
 
@@ -9,6 +10,7 @@ Python 3.6 or higher is required.
 Run
 
 pip install -e git+git@github.com:KlemenSpruk/paysera_webtopay.git#egg=paysera_webtopay for install in editable mode.
+
 For standard install run:
 
 pip install https://github.com/KlemenSpruk/paysera_webtopay/archive/master.zip 
