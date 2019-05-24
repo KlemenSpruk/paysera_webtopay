@@ -17,7 +17,7 @@ test_payment = 1
 def paysera_build_request(request: HttpRequest) -> JsonResponse:
     """
     Build request for paysera payment API
-    parameters: https://developers.paysera.com/en/payments/current#integration-via-library
+    request parameters: https://developers.paysera.com/en/payments/current#integration-via-library
     """
 
     def handle_urls(request: HttpRequest):
