@@ -29,3 +29,5 @@ https://developers.paysera.com/en/payments/current#integration-via-library
 
 ### Example
 
+Integration via library Django Simple Example:
+examples/django_example.py
