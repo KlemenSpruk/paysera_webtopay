@@ -23,3 +23,9 @@ cd  cd /path/to/paysera_webtopay
 
 python -m unittest discover tests -p 'test_*.py'
 
+## Integration
+
+https://developers.paysera.com/en/payments/current#integration-via-library
+
+### Example
+
