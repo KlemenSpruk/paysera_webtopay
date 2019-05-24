@@ -1,4 +1,5 @@
 # paysera_webtopay
+Python integration library for Paysera checkout API: https://developers.paysera.com/en/payments/current
 
 ## Requirements
 
